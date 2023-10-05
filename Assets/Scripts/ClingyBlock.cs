@@ -30,7 +30,7 @@ public class ClingyBlock : MonoBehaviour
 
         foreach(GameObject player in players)
         {
-            if (player.GetComponent<GridMoveable>().isNear(gridObject)) { this.GetComponent<GridMoveable>().move(-player.GetComponent<GridMoveable>().movingDirection * -1); }
+            if (player.GetComponent<GridMoveable>().isNear(gridObject)) { this.GetComponent<GridMoveable>().move(player.GetComponent<GridObject>().gridPosition - gridObject.gridPosition); }
         }
     }
 }

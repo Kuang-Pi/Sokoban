@@ -5,6 +5,7 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
     private GridMoveable gridObject;
+    private bool haveMoved = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,27 +18,32 @@ public class playerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             gridObject.move(new Vector2(0, -1));
+            haveMoved = true;
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
             gridObject.move(new Vector2(0, 1));
+            haveMoved = true;
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
             gridObject.move(new Vector2(-1, 0));
+            haveMoved = true;
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
             gridObject.move(new Vector2(1, 0));
+            haveMoved = true;
         }
 
         // Pull
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && haveMoved)
         {
             foreach(GameObject clingyBlock in GameObject.FindGameObjectsWithTag("Clingy"))
             {
                 clingyBlock.GetComponentInParent<ClingyBlock>().pullingBlock.Invoke();
             }
         }
+        haveMoved = false;
     }
 }
