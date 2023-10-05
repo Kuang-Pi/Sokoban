@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5475667649447584972}
   - component: {fileID: 5475667649447584961}
   - component: {fileID: -2585550577830745142}
+  - component: {fileID: 3917988881863701383}
   m_Layer: 0
   m_Name: clingy
-  m_TagString: Untagged
+  m_TagString: Clingy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,3 +135,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingDirection: {x: -1, y: -1}
+--- !u!114 &3917988881863701383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5475667649447584973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af06e3a550d36d947887075a3c5cc607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pullingBlock:
+    m_PersistentCalls:
+      m_Calls: []

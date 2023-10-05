@@ -67,9 +67,22 @@ public class GridMoveable : MonoBehaviour
                 case "Slick":
                     if(blockMatching.GetComponent<GridMoveable>().move(target - gridObject.gridPosition)) { return true; }
                     return false;
+                case "Clingy":
+                    return false;
             }
         }
         // Passes all check
         return true;
+    }
+
+    public bool isNear(GridObject other)
+    {
+        Vector2 difference = gridObject.gridPosition - other.gridPosition;
+        print(difference);
+        if (difference.x * difference.y == 0 && Mathf.Abs(difference.x + difference.y) == 1) 
+        {
+            return true; 
+        }
+            return false;
     }
 }

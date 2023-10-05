@@ -34,7 +34,10 @@ public class playerController : MonoBehaviour
         // Pull
         if (Input.GetKey(KeyCode.Space))
         {
-
+            foreach(GameObject clingyBlock in GameObject.FindGameObjectsWithTag("Clingy"))
+            {
+                clingyBlock.GetComponentInParent<ClingyBlock>().pullingBlock.Invoke();
+            }
         }
     }
 }

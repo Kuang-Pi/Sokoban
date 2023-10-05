@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Slick
   - Sticky
+  - Clingy
   layers:
   - Default
   - TransparentFX
