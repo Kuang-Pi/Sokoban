@@ -26,6 +26,10 @@ public class GridMoveable : MonoBehaviour
         if(ValidityCheck(this.gridObject.gridPosition + direction))
         {
             movingDirection = direction;
+            foreach (StickyBlock stickyBlock in FindObjectsOfType<StickyBlock>())
+            {
+                stickyBlock.gameObject.SendMessage("StickyMove", this.gameObject);
+            }
             return true;
         }
         return false;
