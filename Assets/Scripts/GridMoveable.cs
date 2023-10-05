@@ -7,6 +7,7 @@ public class GridMoveable : MonoBehaviour
 {
     private GridObject gridObject;
     public Vector2 movingDirection = new Vector2(-1 ,-1);
+    private bool haveMoved = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +24,10 @@ public class GridMoveable : MonoBehaviour
     {
         // Tries to move to the given direction
         // If failed, return false, otherwise return true;
-        if(ValidityCheck(this.gridObject.gridPosition + direction))
+        if(!haveMoved && ValidityCheck(this.gridObject.gridPosition + direction))
         {
             movingDirection = direction;
+            haveMoved = true;
             foreach (StickyBlock stickyBlock in FindObjectsOfType<StickyBlock>())
             {
                 stickyBlock.gameObject.SendMessage("StickyMove", this.gameObject);
@@ -88,5 +90,9 @@ public class GridMoveable : MonoBehaviour
             return true; 
         }
             return false;
+    }
+    private void FixedUpdate()
+    {
+        haveMoved = false;
     }
 }
