@@ -30,5 +30,11 @@ public class playerController : MonoBehaviour
         {
             gridObject.move(new Vector2(1, 0));
         }
+
+        // Pull
+        if (Input.GetKey(KeyCode.Space))
+        {
+
+        }
     }
 }
