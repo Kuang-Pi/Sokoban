@@ -11,7 +11,6 @@ public class playerController : MonoBehaviour
     void Start()
     {
         gridObject = this.GetComponent<GridMoveable>();
-        Record();
     }
 
     // Update is called once per frame
@@ -32,21 +31,25 @@ public class playerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
+                Record();
                 gridObject.move(new Vector2(0, -1));
                 haveMoved = true;
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
+                Record();
                 gridObject.move(new Vector2(0, 1));
                 haveMoved = true;
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
+                Record();
                 gridObject.move(new Vector2(-1, 0));
                 haveMoved = true;
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
+                Record();
                 gridObject.move(new Vector2(1, 0));
                 haveMoved = true;
             }
@@ -60,24 +63,20 @@ public class playerController : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void FixedUpdate()
-    {
-        if (haveMoved)
-        {
-            Record();
-        }
         haveMoved = false;
     }
 
     private void Record()
     {
-        Dictionary<GridObject, Vector2> objectsPositions = new Dictionary<GridObject, Vector2>();
+        Dictionary<GridObject, Vector2> objectsPositions = new();
         foreach (GridObject gridObject in FindObjectsOfType<GridObject>())
         {
             objectsPositions.Add(gridObject, gridObject.gridPosition);
         }
         thePast.Push(objectsPositions);
+        foreach(KeyValuePair<GridObject, Vector2> keyValuePair in objectsPositions)
+        {
+            print(keyValuePair.Key.ToString() + keyValuePair.Value.ToString());
+        }
     }
 }
