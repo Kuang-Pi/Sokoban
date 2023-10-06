@@ -84,7 +84,6 @@ public class GridMoveable : MonoBehaviour
     public bool isNear(GridObject other)
     {
         Vector2 difference = gridObject.gridPosition - other.gridPosition;
-        print(difference);
         if (difference.x * difference.y == 0 && Mathf.Abs(difference.x + difference.y) == 1) 
         {
             return true; 
