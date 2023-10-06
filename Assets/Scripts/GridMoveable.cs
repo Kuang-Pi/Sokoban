@@ -75,6 +75,8 @@ public class GridMoveable : MonoBehaviour
                     return false;
                 case "Clingy":
                     return false;
+                case "Player":
+                    return false;
             }
         }
         // Passes all check
