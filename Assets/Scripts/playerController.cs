@@ -27,6 +27,21 @@ public class playerController : MonoBehaviour
                 }
             }
         }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (thePast.Count != 0)
+            {
+                Dictionary<GridObject, Vector2> nextFuture = null;
+                while (thePast.Count > 0)
+                {
+                    nextFuture = thePast.Pop();
+                }
+                foreach (KeyValuePair<GridObject, Vector2> pair in nextFuture)
+                {
+                    pair.Key.gridPosition = pair.Value;
+                }
+            }
+        }
         else
         {
             if (Input.GetKeyDown(KeyCode.W))
