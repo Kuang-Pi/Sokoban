@@ -1,99 +1,78 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class GridMoveable : MonoBehaviour
 {
-    private GridObject gridObject;
-    public Vector2 movingDirection = new Vector2(-1 ,-1);
-    private bool haveMoved = false;
+    // The naming of this script need to be changed.
+    // This one should be called as gridobject, but it's already taken.
+    // They could merge into 1 script...
+    // But I'm not allowed to modify that script...
+    public GridObject gridObject;
+    public Vector2Int movingDirection = new(0, 0);
+    public Vector2Int tryingDirection = new(0, 0);
+
+    public bool moveSuccessed;
     // Start is called before the first frame update
     void Start()
     {
-        gridObject = this.GetComponent<GridObject>();
+        this.gridObject = this.GetComponent<GridObject>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool Move(Vector2Int target, bool record=true)
     {
-        
-    }
-
-    public bool move(Vector2 direction)
-    {
-        // Tries to move to the given direction
-        // If failed, return false, otherwise return true;
-        if(!haveMoved && ValidityCheck(this.gridObject.gridPosition + direction))
+        void successfulMove()
         {
-            movingDirection = direction;
-            haveMoved = true;
-            foreach (StickyBlock stickyBlock in FindObjectsOfType<StickyBlock>())
-            {
-                stickyBlock.gameObject.SendMessage("StickyMove", this.gameObject);
-            }
-            return true;
+            movingDirection = target;
+            if (record) { GameManager.Instance.movedBlocks.Add(this); }
         }
-        return false;
-    }
-
-    private void LateUpdate()
-    {
-        if(this.movingDirection != new Vector2(-1, -1)) { this.gridObject.gridPosition += movingDirection; }
-        this.movingDirection = new Vector2(-1, -1);
-    }
-
-    private bool ValidityCheck(Vector2 target)
-    {
-        // Interaction with boundary
-        if (target.x < 1 ||
-            target.y < 1 ||
-            target.x > gameManager.Instance.gridDimensions.x ||
-            target.y > gameManager.Instance.gridDimensions.y)
+        // Check with the boundary first
+        if ((this.gridObject.gridPosition + target).x < 1 ||
+            (this.gridObject.gridPosition + target).y < 1 ||
+            (this.gridObject.gridPosition + target).x > FindObjectOfType<GridMaker>().dimensions.x ||
+            (this.gridObject.gridPosition + target).y > FindObjectOfType<GridMaker>().dimensions.y)
         { return false; }
 
-        // Interaction with other blocks
-        GridObject[] blocks = FindObjectsOfType<GridObject>();
-        GridObject blockMatching = null;  // There should only be 1 block on a single grid. 
-        foreach (GridObject block in blocks)
+        else
         {
-            if (block.gridPosition == target)
+            // Check if the destinated location have a block
+            List<GridMoveable> matchingBlock = new();
+            foreach (GridMoveable block in FindObjectsOfType<GridMoveable>())
             {
-                blockMatching = block;
-                break;
+                if(block.gridObject.gridPosition + block.movingDirection == this.gridObject.gridPosition + target)
+                {
+                    if(block != this) { matchingBlock.Add(block); }
+                    print(block);
+                }
+            }
+
+            if (matchingBlock.Count > 0)
+            {
+                // Here means we have a block in our way.
+                // We need to check if it is a wall first, this will save us a lot time.
+                if (matchingBlock[0].CompareTag("Wall") || matchingBlock[0].CompareTag("Clingy"))
+                {
+                    return false;
+                }
+                else
+                {
+                    if (matchingBlock[0].Move(target))
+                    {
+                        successfulMove();
+                        return true;
+                    }
+                    else
+                    {
+                        tryingDirection = target;
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                successfulMove();
+                return true;
             }
         }
-
-        if(blockMatching != null)
-        {
-            switch (blockMatching.tag)
-            {
-                case "Wall":
-                    return false;
-                case "Slick":
-                    if(blockMatching.GetComponent<GridMoveable>().move(target - gridObject.gridPosition)) { return true; }
-                    return false;
-                case "Clingy":
-                    return false;
-                case "Player":
-                    return false;
-            }
-        }
-        // Passes all check
-        return true;
-    }
-
-    public bool isNear(GridObject other)
-    {
-        Vector2 difference = gridObject.gridPosition - other.gridPosition;
-        if (difference.x * difference.y == 0 && Mathf.Abs(difference.x + difference.y) == 1) 
-        {
-            return true; 
-        }
-            return false;
-    }
-    private void FixedUpdate()
-    {
-        haveMoved = false;
     }
 }

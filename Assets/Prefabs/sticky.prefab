@@ -12,12 +12,10 @@ GameObject:
   - component: {fileID: 2883449981151806095}
   - component: {fileID: 2883449981151806094}
   - component: {fileID: 2883449981151806097}
-  - component: {fileID: -6555391703285251009}
-  - component: {fileID: -7692188171829434986}
-  - component: {fileID: 7754620540740922159}
+  - component: {fileID: 7506928873495277409}
   m_Layer: 0
   m_Name: sticky
-  m_TagString: Wall
+  m_TagString: Sticky
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridPosition: {x: 3, y: 0}
---- !u!114 &-6555391703285251009
+--- !u!114 &7506928873495277409
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,31 +130,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2883449981151806093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9c6d72052eda4db3ab843549e4b5ac2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b26783cbd7b7435dadb390afec0fc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingDirection: {x: -1, y: -1}
---- !u!114 &-7692188171829434986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2883449981151806093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b843e69c6c6854853b0182cfe674497c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7754620540740922159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2883449981151806093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b843e69c6c6854853b0182cfe674497c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  gridObject: {fileID: 0}
+  movingDirection: {x: 0, y: 0}
+  tryingDirection: {x: 0, y: 0}
+  moveSuccessed: 0

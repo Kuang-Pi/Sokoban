@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 4622493296140815978}
   - component: {fileID: 4622493296140815977}
   - component: {fileID: 4622493296140815988}
-  - component: {fileID: 6737448992123574861}
+  - component: {fileID: 7443129893977001208}
   m_Layer: 0
   m_Name: slick
-  m_TagString: Slick
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridPosition: {x: 4, y: 0}
---- !u!114 &6737448992123574861
+--- !u!114 &7443129893977001208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,7 +130,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4622493296140815976}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9c6d72052eda4db3ab843549e4b5ac2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b26783cbd7b7435dadb390afec0fc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingDirection: {x: -1, y: -1}
+  gridObject: {fileID: 0}
+  movingDirection: {x: 0, y: 0}
+  tryingDirection: {x: 0, y: 0}
+  moveSuccessed: 0

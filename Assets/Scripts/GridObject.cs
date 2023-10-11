@@ -6,8 +6,8 @@ using NaughtyAttributes;
 [ExecuteInEditMode]
 public class GridObject : MonoBehaviour
 {
-    public Vector2 gridPosition;
-    private Vector2 prevGridPosition;
+    public Vector2Int gridPosition;
+    private Vector2Int prevGridPosition;
 
     private void Update()
     {
